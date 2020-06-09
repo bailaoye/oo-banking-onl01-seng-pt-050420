@@ -18,14 +18,15 @@ class Transfer
 
   def execute_transaction
     #use @sender. to link with bank account
-    if sender.balance < amount
-      @status = "rejected" || @sender.status = "closed"
-      "Transaction rejected. Please check your account balance."
-
-    elsif self.valid? && self.status == "pending" && sender.balance > amount
+    if self.valid? && self.status == "pending" && sender.balance > amount
       @receiver.balance += amount
       @sender.balance -= amount
       @status = "complete"
+
+    else
+      @status = "rejected" || @sender.status = "closed"
+      "Transaction rejected. Please check your account balance."
+
     end
   end
 
